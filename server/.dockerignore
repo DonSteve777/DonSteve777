@@ -1,0 +1,4 @@
+node_modules
+npm-debug.log
+src
+#creo que deberia ignorar tambien src y quedarme con build solo

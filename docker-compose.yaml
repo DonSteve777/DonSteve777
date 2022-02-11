@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+
+  node:    
+    image: donsteve/node-img
+    ports:
+      - 3000:3000
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DB: liferay-db
+  
+  servicioMYSQL:
+    image: mysql:8.0
+    ports:
+      - 3307:3307
+    volumes:
+      - ./vol-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: register
+      # networks:
+      # mysql_netwoks:
+      #   aliases:
+      #     - msql_host
+
+# volumes:
+#   myvol: {}
+#   mysql_network:
+#     name: mysql_netwoksdriver: dbridge
