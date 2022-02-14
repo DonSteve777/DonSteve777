@@ -1,10 +1,11 @@
 export default{
     
     database: {
-        host: 'localhost',
+        host: 'servicioMYSQL',
         user: 'root',
         password: 'root',
-        database: 'liferay_db'
+        database: 'liferay_db',
+        port: 3306
     }
  }
 

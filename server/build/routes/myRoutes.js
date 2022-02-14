@@ -9,7 +9,6 @@ class MyRoutes {
     }
     config() {
         this.router.post('/', myRoutesController_1.controller.create);
-        //this.router.ge('/', (req, res) => res.json({message: 'hello world'}));
     }
 }
 const myRoutes = new MyRoutes();
