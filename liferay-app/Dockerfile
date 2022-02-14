@@ -1,26 +1,28 @@
-FROM node:16.14-alpine
-#crea la carpeta que contiene los archivos necesarios para que funcione la aplicacion
-RUN mkdir -p /app
+FROM node:latest as node
+
+ARG ENV=prod
+ARG APP=liferay-app
+
+ENV ENV ${ENV}
+ENV APP ${APP}
 
 WORKDIR /app
+COPY ./ /app/
 
-COPY package*.json /app
-
-RUN npm cache clean --force
-RUN npm install
-
-COPY . /app
-
+# Instala y construye el Angular App
+RUN npm ci
 RUN npm run build --prod
+RUN mv /app/dist/${APP}/* /app/dist/
 
-FROM nginx
-COPY --from=build-step /app/dist /usr/share/nginx/html
-#RUN npm run build --prod
-  #instala las dependencias del package.json
+# Angular app construida, la vamos a hostear un server production, este es Nginx
 
-#CMD ng serve --host 0.0.0.0 --disable
-#RUN npm run build --prod
-#CMD ["ng", "serve"]
-#CMD ["node", "build/index.js"]
-#CMD ng serve
+FROM nginx:1.13.8-alpine
 
+COPY --from=node /app/dist/ /usr/share/nginx/html
+#COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+
+
+
+
+# lo he puesto a correr pero no veo naaaa
+#docker logs, y a ver si me cato de algo

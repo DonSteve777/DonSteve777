@@ -1,7 +1,6 @@
 version: "3.7"
 
 services:
-
   node:    
     image: donsteve/node-img
     ports:
@@ -25,6 +24,11 @@ services:
       # mysql_netwoks:
       #   aliases:
       #     - msql_host
+
+    angular:    
+      image: donsteve/ng-img
+      ports:
+        - 8080:80
 
 # volumes:
 #   myvol: {}
