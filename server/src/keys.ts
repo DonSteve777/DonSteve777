@@ -2,8 +2,8 @@ export default{
     
     database: {
         host: 'servicioMYSQL',
-        user: 'root',
-        password: 'root',
+        user: 'dockerUser',
+        password: 'dockerUser',
         database: 'liferay_db',
         port: 3306
     }

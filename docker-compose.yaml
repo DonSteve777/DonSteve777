@@ -10,15 +10,12 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: register
-    # networks:
-    #   mysql_network:
-    #     aliases:
-    #       - msql_host
+
 
   node:
     depends_on:
         - servicioMYSQL    
-    image: donsteve/node-img
+    image: donsteve/node-img:v2
     ports:
       - 3000:3000
     environment:
@@ -27,14 +24,10 @@ services:
       MYSQL_PASSWORD: root
       MYSQL_DB: liferay-db
   
-  # angular:    
-  #   image: donsteve/ng-img
-  #   ports:
-  #     - 8080:80
+  angular:    
+    image: donsteve/ng-img
+    ports:
+      - 8080:80
 
 volumes:
   myvol: {}
-# networks:
-#   mysql_network:
-#     name: mysql_net
-#     driver: bridge

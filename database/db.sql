@@ -2,7 +2,10 @@ CREATE DATABASE liferay_db;
 
 USE liferay_db;
 
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+--ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+CREATE USER 'dockerUser'@'172.19.0.3' IDENTIFIED WITH mysql_native_password BY 'dockerUser';
+GRANT ALL PRIVILEGES ON liferay_db.* TO 'dockerUser'@'172.19.0.3';
+
 
 CREATE TABLE register(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
