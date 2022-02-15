@@ -1,2 +1,7 @@
 vol-mysql-data
+server/node_modules
+liferay-app/node_modules
+.vscode
+.angular/
+
 #deberi

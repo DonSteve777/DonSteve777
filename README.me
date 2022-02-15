@@ -1,15 +1,68 @@
+--------------
+    Código : en esta rama solo hay codigo fuente. No hay compilaciones ni dependencias.
+--------------
+    database/db.sql
+        crea base de datos, usuario y tabla
+
+    server
+        back-end en node.js con el framework express, desarrollado en typescript
+
+        server/src
+                index.ts -> configuración, enrutamiento, instanciación y ejecución del servidor 
+                database.ts -> conexióna base de datos
+                keys.ts -> credenciales para la conexión
+
+         server/src/controllers/myRoutesController.ts -> request del front-end y operación de base de datos
+         server/src/controllers/myRoutes.ts -> ruta para el post que creará el registro en bdd.
+
+
+    liferay-app
+        front-end con el formulario desarrolado en angular, con angular material
+
+        liferay/src/app/models
+            modelo para la abstraccion el usuario que se registra
+        
+        liferay/src/app/my-form
+            componente angular con el formulario
+
+        liferay/src/app/services
+            servicio con la petición http al back-end
+
+
+---------------
+Despliegue:
+----------------
+    Solo se necesita docker, y un  cliente de mysql
+    Yo en este caso he usado el MYSQL workbench 8.0
+
+    Pasos:
+        1. Descargar el docker-compose situado en la raiz de este proyecto
+
+        2. Ejecutar el docker compose -> docker-compose up
+            formulario -> localhost:8080
+            back-end -> localhost:3000 
+                se mostrará el error típico de que no hay una ruta para GET, ya que
+                sólo tengo la ruta para el POST del formulario.
+                En este momento solo muestro información en la consola. 
+
+        3. Crear conexión en el MYSQL workbench con el puerto 23306      
+
+        4. Ejecutar el database/db.sql para crear base de datos, usuario y tabla
+
+    Es posible que se cree antes el contenedor de node.js, que el de mysql. En ese caso reiniciar el de node.
+
 Credenciales base de datos:
+
     database: {
-        host: '127.0.0.1',
-        user: 'root',
-        password: 'root',
+        host: 'servicioMYSQL',  -> El usuario creado desde database/db.sql esta pensado para la ip 172.19.0.3
+                                  que realmente lo he identificado una vez desplegado el contentedor,
+                                  y no tengo la certeza de que siempre vaya a tener esa ip.
+                                  con el comando : 
+                                        docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' pruebaliferay-servicioMYSQL-1   
+                                                donde pruebaliferay-servicioMYSQL-1 es el nombre del contenedor de mysql en este caso.
+
+        user: 'dockerUser',
+        password: 'dockerUser', 
         database: 'liferay_db',
-        port: 23306
+        port: 3306
     }
-
-    Poblar base de datos:
-        ejecutar el database/bd.sql en el cliente de bdd
-    
-
-
- 
