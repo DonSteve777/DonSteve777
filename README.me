@@ -1,0 +1,58 @@
+--------------
+    Código : rama de desarrollo para desplegar en localhost
+--------------
+    database/db.sql
+        crea base de datos, usuario y tabla
+
+    server
+        back-end en node.js con el framework express, desarrollado en typescript
+
+        server/src
+                index.ts -> configuración, enrutamiento, instanciación y ejecución del servidor 
+                database.ts -> conexióna base de datos
+                keys.ts -> credenciales para la conexión
+
+         server/src/controllers/myRoutesController.ts -> request del front-end y operación de base de datos
+         server/src/controllers/myRoutes.ts -> ruta para el post que creará el registro en bdd.
+
+
+    liferay-app
+        front-end con el formulario desarrolado en angular, con angular material
+
+        liferay/src/app/models
+            modelo para la abstraccion el usuario que se registra
+        
+        liferay/src/app/my-form
+            componente angular con el formulario
+
+        liferay/src/app/services
+            servicio con la petición http al back-end
+
+
+Despliegue en localhost:
+	
+
+    Instalar primero las siguientes dependencias:
+    Node.js
+    https://nodejs.org/download/release/v16.13.2/
+        Instalador de Windows 64 bits: win-x64/  
+        
+    Angular cli:
+        npm install -g @angular/cli
+
+    MYSQL workbench 8.0
+        https://dev.mysql.com/downloads/workbench/
+
+
+    La carpeta  ‘liferay-app’ contiene una apliación en Angular  para la parte de front-end. Este servicio usa el puerto 4200. 
+    Despliegue:
+            npm start 
+
+
+    En la carptea server, se ubica un servidor de node.js con el framework express (dependencia que gestiona ya npm). Escucha por el puerto 3000.
+    Despliegue
+            npm start
+
+    Y en la carpeta database, hay un script de sql para ejecutarlo en MYSQL workbench, que crea la base de datos, la selecciona y crea la tabla que contendrá la información enviada desde el formulario de angular.
+
+
